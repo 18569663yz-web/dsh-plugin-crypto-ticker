@@ -54,6 +54,26 @@ dsh plugin --profile web add dsh-plugin-crypto-ticker
 
 装完**重启 dsh web** 即可（桌面端则完全退出后重开）。
 
+#### 国内网络：`ERR_PNPM_GIT_RESOLVE_FAILED`
+
+`pnpm` 用 `git ls-remote` 解析 `github:` 依赖，**它只走 HTTPS，不读浏览器/系统的代理设置**。国内直连 github.com 经常超时，会报：
+
+```
+Error: ERR_PNPM_GIT_RESOLVE_FAILED
+  ╰─▶ Failed to resolve git dependency "github:...": git ls-remote failed:
+      fatal: unable to access 'https://github.com/...': Failed to connect to github.com port 443
+```
+
+给这次安装配上代理即可（端口换成你自己的）：
+
+```powershell
+$env:HTTPS_PROXY = 'http://127.0.0.1:7890'
+$env:HTTP_PROXY  = 'http://127.0.0.1:7890'
+dsh plugin --profile web add github:18569663yz-web/dsh-plugin-crypto-ticker
+```
+
+> **插件运行时不需要这个。** 行情请求走的是本插件自带的传输层，它会自己读 Windows 系统代理（见下面「系统代理」一节），不受 `HTTPS_PROXY` 是否设置影响。
+
 ### 方式二：脚本安装（不经过 pnpm）
 
 适合离线或不想动 node_modules 的场景：

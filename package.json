@@ -29,7 +29,8 @@
     "README.md",
     "LICENSE",
     "screenshot.png",
-    "screenshot-full.png"
+    "screenshot-full.png",
+    "tests"
   ],
   "dsh": {
     "bundle": {
