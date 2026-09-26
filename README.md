@@ -37,11 +37,7 @@
 ### 方式一：`dsh plugin`（推荐）
 
 ```sh
-# 从 GitHub
-dsh plugin --profile web add github:<你的用户名>/dsh-plugin-crypto-ticker
-
-# 或从 npm
-dsh plugin --profile web add dsh-plugin-crypto-ticker
+dsh plugin --profile web add github:18569663yz-web/dsh-plugin-crypto-ticker
 ```
 
 `dsh plugin` 会把包装进 `$DSH_HOME/profiles/web`，并**自动把它加入 profile 的 bundle 层栈**（因为本包的 `package.json` 声明了 `dsh.bundle.patch`）：
@@ -64,7 +60,15 @@ Error: ERR_PNPM_GIT_RESOLVE_FAILED
       fatal: unable to access 'https://github.com/...': Failed to connect to github.com port 443
 ```
 
-给这次安装配上代理即可（端口换成你自己的）：
+有两个办法。**优先用预构建的 tarball**——它是打包好的 `.tgz`，pnpm 直接下载解包，完全不经过 git，所以不需要代理：
+
+```sh
+dsh plugin --profile web add https://github.com/18569663yz-web/dsh-plugin-crypto-ticker/releases/download/v0.1.0/dsh-plugin-crypto-ticker-0.1.0.tgz
+```
+
+每个 [Release](https://github.com/18569663yz-web/dsh-plugin-crypto-ticker/releases) 页面的 Assets 里都有这个文件，把版本号换成你想装的那个即可。
+
+或者给这次安装配上代理（端口换成你自己的）：
 
 ```powershell
 $env:HTTPS_PROXY = 'http://127.0.0.1:7890'
