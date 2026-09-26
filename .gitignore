@@ -1,0 +1,16 @@
+# 依赖与构建产物（本插件无需构建，保留以防日后引入）
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+.npm/
+
+# 本地验证留下的东西
+.tmp-*/
+*.log
+*.result.txt
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

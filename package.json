@@ -1,0 +1,59 @@
+{
+  "name": "dsh-plugin-crypto-ticker",
+  "version": "0.1.0",
+  "description": "DSH 侧边栏左下角的实时加密货币行情卡片：BTC / ETH / SOL 等主流代币的价格、24h 涨跌与迷你走势图",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "crypto",
+    "ticker",
+    "bitcoin",
+    "ethereum",
+    "solana",
+    "行情"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "https.mjs",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "screenshot.png",
+    "screenshot-full.png"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=22.19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/18569663yz-web/dsh-plugin-crypto-ticker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/18569663yz-web/dsh-plugin-crypto-ticker/issues"
+  },
+  "scripts": {
+    "test": "node tests/smoke.mjs",
+    "test:live": "node tests/live.mjs"
+  }
+}

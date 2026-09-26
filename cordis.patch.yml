@@ -1,0 +1,16 @@
+# dsh-plugin-crypto-ticker 的 bundle patch。
+#
+# 这一层在 @deepseek-ai/dsh-base 与 @deepseek-ai/dsh-web-app 之后、profile 自己的
+# cordis.patch.yml 之前应用。行的 name 用包名：dsh 通过 profile 的 node_modules
+# 解析它，所以只要这个包被 `dsh plugin --profile <name> add <本包>` 装进来就能工作。
+#
+# config 全部可选，下面写的是默认值，按需删改：
+#   symbols           要显示的标的，默认 [BTC, ETH, SOL, JUP]
+#   schedule          行情刷新间隔（秒），默认 15
+#   cacheMs           宿主缓存窗口，默认 10000
+#   sparklineCacheMs  走势序列重取间隔，默认 300000
+#   upstreamTimeoutMs 单个信源的超时，默认 8000
+#   proxy             显式代理（如 'http://127.0.0.1:7890'）；false 强制直连；不填则自动探测
+- insert:
+    - id: crypto-ticker
+      name: dsh-plugin-crypto-ticker
