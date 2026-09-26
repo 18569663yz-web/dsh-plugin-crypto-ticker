@@ -60,13 +60,17 @@ Error: ERR_PNPM_GIT_RESOLVE_FAILED
       fatal: unable to access 'https://github.com/...': Failed to connect to github.com port 443
 ```
 
-有两个办法。**优先用预构建的 tarball**——它是打包好的 `.tgz`，pnpm 直接下载解包，完全不经过 git，所以不需要代理：
+**优先改用 codeload 的 tar 包地址。** 实测国内可以直连——被挡的是 `github.com`，`codeload.github.com` 是通的，而且这条路径完全不经过 git：
+
+```sh
+dsh plugin --profile web add https://codeload.github.com/18569663yz-web/dsh-plugin-crypto-ticker/tar.gz/refs/heads/main
+```
+
+Release 页面里的 `.tgz` 资产也能装，但**它同样需要代理**：下载会 302 跳到 `objects.githubusercontent.com`，国内直连不通。
 
 ```sh
 dsh plugin --profile web add https://github.com/18569663yz-web/dsh-plugin-crypto-ticker/releases/download/v0.1.0/dsh-plugin-crypto-ticker-0.1.0.tgz
 ```
-
-每个 [Release](https://github.com/18569663yz-web/dsh-plugin-crypto-ticker/releases) 页面的 Assets 里都有这个文件，把版本号换成你想装的那个即可。
 
 或者给这次安装配上代理（端口换成你自己的）：
 
