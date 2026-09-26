@@ -4,6 +4,10 @@ package-lock.json
 pnpm-lock.yaml
 .npm/
 
+# npm pack 的输出。它是发布用的构建产物，Release 页面里已经有一份，
+# 不留在仓库里（否则每次 pack 都会把 200KB 的二进制重复提交一次）。
+*.tgz
+
 # 本地验证留下的东西
 .tmp-*/
 *.log
